@@ -19,5 +19,6 @@ public class PlayerMove : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
         rb.AddForce(movement * moveSpeed);
+        
     }
 }
