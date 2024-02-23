@@ -29,5 +29,7 @@ public class GameManager : MonoBehaviour
     public void OnLevelUp()
     {
         Debug.Log("Player Leveled Up");
+
+        PlayerManager.Instance.ResetPlayerXP(5);
     }
 }
