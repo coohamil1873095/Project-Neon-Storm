@@ -27,6 +27,11 @@ public class PlayerXP : MonoBehaviour
         currentXP += XPVal;
     }
 
+    public int GetCurrentExperience()
+    {
+        return currentXP;
+    }
+
     public void SetExperienceGoal(int newXPGoal)
     {
         currentXP = 0;
