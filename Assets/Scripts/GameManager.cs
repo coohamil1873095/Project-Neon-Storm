@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player Leveled Up");
 
         PlayerManager.Instance.ResetPlayerXP(5);
+        UpdateXPCounter(0);
     }
 
     public void QuitGame()
