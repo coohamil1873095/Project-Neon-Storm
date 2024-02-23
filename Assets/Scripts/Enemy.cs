@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFollow : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public float moveSpeed = 3f;
+    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private int enemyHealth;
+    [SerializeField] private int XPCount;
     private Transform player;
 
     void Start()
@@ -24,6 +26,16 @@ public class EnemyFollow : MonoBehaviour
             Vector3 directionToPlayer = player.position - transform.position;
             Vector3 normalizedDirection = directionToPlayer.normalized;
             transform.Translate(normalizedDirection * moveSpeed * Time.deltaTime);
+        }
+    }
+
+    public void DamageEnemy(int damageVal) 
+    {
+        enemyHealth -= damageVal;
+        if (enemyHealth <= 0) 
+        {
+            PlayerManager.Instance.GivePlayerXP(XPCount);
+            EnemyManager.Instance.DestroyEnemy(this);
         }
     }
 }
