@@ -31,4 +31,9 @@ public class PlayerManager : MonoBehaviour
     {
         player.GetComponent<PlayerXP>().AddExperience(XPVal);
     }
+
+    public void ResetPlayerXP(int newXPGoal)
+    {
+        player.GetComponent<PlayerXP>().SetExperienceGoal(newXPGoal);
+    }
 }

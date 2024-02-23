@@ -61,6 +61,6 @@ public class EnemyManager : MonoBehaviour
 
     public void DestroyEnemy(Enemy enemy) 
     {
-        Destroy(enemy.gameObject);
+        enemy.gameObject.SetActive(false);
     }
 }
