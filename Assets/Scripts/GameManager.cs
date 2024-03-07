@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     public static bool isPlaying { get; private set; }
     private Canvas gameHUD;
     [SerializeField] private TMP_Text XPText;
-    
-    void Awake() 
+    [SerializeField] private TMP_Text LevelText;
+    private int level = 1;
+
+    void Awake()
     {
-        if (Instance != null && Instance != this) 
+        if (Instance != null && Instance != this)
             Destroy(gameObject);
-        else 
+        else
             Instance = this;
     }
 
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameHUD = GameObject.Find("Game HUD").GetComponent<Canvas>();
-        
+
         isPlaying = true;
     }
 
@@ -43,15 +45,16 @@ public class GameManager : MonoBehaviour
         XPText.SetText("XP: " + newXPVal);
     }
 
-    public void toggleGameHUD(bool activeStatus) 
+    public void toggleGameHUD(bool activeStatus)
     {
         gameHUD.enabled = activeStatus;
     }
 
     public void OnLevelUp()
     {
+        level++;
         Debug.Log("Player Leveled Up");
-
+        LevelText.SetText("Level: " + level);
         PlayerManager.Instance.ResetPlayerXP(5);
         UpdateXPCounter(0);
     }
