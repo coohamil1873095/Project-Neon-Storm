@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPowers : MonoBehaviour
 {
@@ -8,36 +11,77 @@ public class PlayerPowers : MonoBehaviour
     private GameObject ring; // Reference to the instantiated ring
     public float pushForce = 5f;
     public float powerupCooldown = 5f;
-    private bool canActivatePower = true;
+    public float ringUptime = 0.5f;
+    private bool isAbility1Cooldown = false;
+
+    [Header("Ability 1")]
+    public Image abilityImage1;
+    public KeyCode ability1Key;
+    private float currentAbilityCooldown;
 
     void Start()
     {
         ring = Instantiate(ringPrefab, transform.position, Quaternion.identity);
         ring.SetActive(false);
         ring.transform.parent = transform;
+
+        abilityImage1.fillAmount = 0;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && canActivatePower)
+        Ability1Input();
+        AbilityCooldown(ref currentAbilityCooldown, powerupCooldown, ref isAbility1Cooldown, abilityImage1);
+    }
+    private void Ability1Input()
+    {
+        if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown)
         {
+            Debug.Log("activate!");
             ActivatePower1();
+            isAbility1Cooldown = true;
+            currentAbilityCooldown = powerupCooldown;
+
         }
     }
-
     void ActivatePower1()
     {
         ring.SetActive(true);
-        StartCoroutine(DisableRingAfterDelay(0.5f));
-        StartCoroutine(PowerupCooldown());
+        StartCoroutine(DisableRingAfterDelay(ringUptime));
+        //StartCoroutine(PowerupCooldown());
     }
 
-    IEnumerator PowerupCooldown()
+    private void AbilityCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
+    {
+        if (isCooldown)
+        {
+            currentCooldown -= Time.deltaTime;
+            if (currentCooldown <= 0f)
+            {
+                isCooldown = false;
+                currentCooldown = 0f;
+                if (skillImage != null)
+                {
+                    skillImage.fillAmount = 0f;
+                }
+            }
+            else
+            {
+                if (skillImage != null)
+                {
+                    skillImage.fillAmount = currentCooldown / maxCooldown;
+                }
+            }
+        }
+
+    }
+
+    /*IEnumerator PowerupCooldown()
     {
         canActivatePower = false;
         yield return new WaitForSeconds(powerupCooldown);
         canActivatePower = true;
-    }
+    }*/
 
     IEnumerator DisableRingAfterDelay(float delay)
     {
@@ -73,5 +117,12 @@ public class PlayerPowers : MonoBehaviour
     void DisableRing()
     {
         ring.SetActive(false);
+    }
+
+    public void LevelPush()
+    {
+        pushForce += 1f;
+        powerupCooldown -= 1f;
+        ringUptime += 0.5f;
     }
 }
