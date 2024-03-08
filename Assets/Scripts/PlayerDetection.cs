@@ -5,30 +5,45 @@ using UnityEditor;
 
 public class PlayerDetection : MonoBehaviour
 {
-    public float fov;   //how far you want the cone to extend from player
-    [Range(0, 360)] public float fovAngle;      //size of cone (in degrees)
+    public float fov;   // How far you want the cone to extend from the player
+    [Range(0, 360)] public float fovAngle;      // Size of cone (in degrees)
     private Collider2D target;
+    private bool isLeftMouseButtonDown = false;
 
     private void OnDrawGizmos()
     {
-        Handles.color = new Color(1, 0, 0, 0.3f);
-        Handles.DrawSolidArc(transform.position , transform.forward , Quaternion.AngleAxis(-fovAngle/2f , transform.forward)*transform.up , fovAngle , fov);
-        //Handles.DrawSolidDisc(transform.position , transform.forward , fov);
+        if (isLeftMouseButtonDown)
+        {
+            Handles.color = new Color(1, 0, 0, 0.3f);
+            Handles.DrawSolidArc(transform.position, transform.forward, Quaternion.AngleAxis(-fovAngle / 2f, transform.forward) * transform.up, fovAngle, fov);
+        }
     }
 
     private void Update()
     {
-        target = Physics2D.OverlapCircle(transform.position, fov);
-        if (target && target.tag == "Enemy")
+        if (Input.GetMouseButtonDown(0))  // Left mouse button is pressed
         {
-            float signedAngle = Vector3.Angle(
-            transform.up,
-            target.transform.position - transform.position);
-            if (Mathf.Abs(signedAngle) < fovAngle / 2)
+            isLeftMouseButtonDown = true;
+        }
+        else if (Input.GetMouseButtonUp(0))  // Left mouse button is released
+        {
+            isLeftMouseButtonDown = false;
+        }
+
+        if (isLeftMouseButtonDown)
+        {
+            target = Physics2D.OverlapCircle(transform.position, fov);
+            if (target && target.tag == "Enemy")
             {
-                //Debug.Log("found an enemy!");
-                target.GetComponent<Enemy>().DamageEnemy(1);
-                //Debug.Log("found an enemy!");
+                float signedAngle = Vector3.Angle(
+                    transform.up,
+                    target.transform.position - transform.position);
+
+                if (Mathf.Abs(signedAngle) < fovAngle / 2)
+                {
+                    Debug.Log("Found an enemy!");
+                    target.GetComponent<Enemy>().DamageEnemy(1);
+                }
             }
         }
     }
