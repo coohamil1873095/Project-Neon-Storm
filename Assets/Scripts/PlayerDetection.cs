@@ -26,7 +26,7 @@ public class PlayerDetection : MonoBehaviour
             target.transform.position - transform.position);
             if (Mathf.Abs(signedAngle) < fovAngle / 2)
             {
-                Debug.Log("found an enemy!");
+                //Debug.Log("found an enemy!");
                 target.GetComponent<Enemy>().DamageEnemy(1);
                 //Debug.Log("found an enemy!");
             }
