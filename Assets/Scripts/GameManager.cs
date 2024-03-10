@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     private Canvas gameHUD;
     private Canvas levelHUD;
     private Canvas abilityHUD;
-    [SerializeField] private TMP_Text XPText;
     [SerializeField] private TMP_Text LevelText;
     private int level = 1;
 
@@ -31,6 +30,7 @@ public class GameManager : MonoBehaviour
         abilityHUD = GameObject.Find("Ability HUD").GetComponent<Canvas>();
         toggleLevelHUD(false);
         isPlaying = true;
+        GetComponent<TimerController>().StartTimer();
     }
 
     // Update is called once per frame
@@ -44,11 +44,6 @@ public class GameManager : MonoBehaviour
             toggleAbilityHUD(false);
             MenuManager.OpenMenu(Menu.PAUSE_MENU, null);
         }
-    }
-
-    public void UpdateXPCounter(int newXPVal)
-    {
-        XPText.SetText("XP: " + newXPVal);
     }
 
     public void toggleGameHUD(bool activeStatus)
@@ -74,7 +69,6 @@ public class GameManager : MonoBehaviour
         toggleLevelHUD(true);
         SetPauseStatus(true);
         PlayerManager.Instance.ResetPlayerXP(level * 5);
-        UpdateXPCounter(0);
     }
 
     public void SetPauseStatus(bool pauseStatus)

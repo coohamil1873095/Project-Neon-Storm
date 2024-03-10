@@ -8,6 +8,7 @@ public class LevelUpMenu : MonoBehaviour
     {
         GameManager.Instance.SetPauseStatus(false);
         GameManager.Instance.toggleLevelHUD(false);
+        PlayerManager.Instance.ResetPlayerXPBar();
     }
     
 }

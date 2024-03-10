@@ -6,6 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     [SerializeField] private GameObject player;
+
+    private PlayerXP playerXP;
     
     void Awake() 
     {
@@ -18,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerXP = player.GetComponent<PlayerXP>();
     }
 
     // Update is called once per frame
@@ -29,12 +31,16 @@ public class PlayerManager : MonoBehaviour
 
     public void GivePlayerXP(int XPVal) 
     {
-        player.GetComponent<PlayerXP>().AddExperience(XPVal);
-        GameManager.Instance.UpdateXPCounter(player.GetComponent<PlayerXP>().GetCurrentExperience());
+        playerXP.AddExperience(XPVal);
     }
 
     public void ResetPlayerXP(int newXPGoal)
     {
-        player.GetComponent<PlayerXP>().SetExperienceGoal(newXPGoal);
+        playerXP.SetExperienceGoal(newXPGoal);
+    }
+
+    public void ResetPlayerXPBar() 
+    {
+        playerXP.UpdateExperienceBar(0, playerXP.GetExperienceGoal());
     }
 }
