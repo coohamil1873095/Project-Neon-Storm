@@ -5,10 +5,13 @@ using UnityEditor;
 
 public class PlayerDetection : MonoBehaviour
 {
+    [SerializeField] private float playerWeaponDamage;
+    [SerializeField] private float playerWeaponCooldown;
     public float fov;   // How far you want the cone to extend from the player
     [Range(0, 360)] public float fovAngle;      // Size of cone (in degrees)
     private Collider2D target;
     private bool isLeftMouseButtonDown = false;
+    private bool dmgActive = false;
 
     private void OnDrawGizmos()
     {
@@ -39,12 +42,20 @@ public class PlayerDetection : MonoBehaviour
                     transform.up,
                     target.transform.position - transform.position);
 
-                if (Mathf.Abs(signedAngle) < fovAngle / 2)
+                if (Mathf.Abs(signedAngle) < fovAngle / 2 && !dmgActive)
                 {
-                    Debug.Log("Found an enemy!");
-                    target.GetComponent<Enemy>().DamageEnemy(1);
+                    StartCoroutine(ApplyDamage());
+                    
                 }
             }
         }
+    }
+
+    IEnumerator ApplyDamage()
+    {
+        target.GetComponent<Enemy>().DamageEnemy(playerWeaponDamage);
+        dmgActive = true;
+        yield return new WaitForSeconds(playerWeaponCooldown);
+        dmgActive = false;
     }
 }

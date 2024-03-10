@@ -15,10 +15,13 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
-        rb.AddForce(movement * moveSpeed);
+        if (!GameManager.Instance.GameIsPaused())
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
+            rb.AddForce(movement * moveSpeed);
+        }
         
     }
 }
