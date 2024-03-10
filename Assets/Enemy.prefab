@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
-  enemyHealth: 1
+  enemyHealth: 3
   XPCount: 1
   slider: {fileID: 2990569094364331985}
 --- !u!1 &1838405935418484934
