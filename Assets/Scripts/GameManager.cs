@@ -7,8 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public static bool isPlaying { get; private set; }
+    private bool isPaused;
     private Canvas gameHUD;
     private Canvas levelHUD;
+    private Canvas abilityHUD;
     [SerializeField] private TMP_Text XPText;
     [SerializeField] private TMP_Text LevelText;
     private int level = 1;
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         gameHUD = GameObject.Find("Game HUD").GetComponent<Canvas>();
         levelHUD = GameObject.Find("Level HUD").GetComponent<Canvas>();
+        abilityHUD = GameObject.Find("Ability HUD").GetComponent<Canvas>();
         toggleLevelHUD(false);
         isPlaying = true;
     }
@@ -33,11 +36,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.isPaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
-            PauseMenu.isPaused = true;
-            Time.timeScale = 0;
+            isPaused = true;
+            SetPauseStatus(true);
             toggleGameHUD(false);
+            toggleAbilityHUD(false);
             MenuManager.OpenMenu(Menu.PAUSE_MENU, null);
         }
     }
@@ -57,15 +61,39 @@ public class GameManager : MonoBehaviour
         levelHUD.enabled = activeStatus;
     }
 
+    public void toggleAbilityHUD(bool activeStatus)
+    {
+        abilityHUD.enabled = activeStatus;
+    }
+
     public void OnLevelUp()
     {
         level++;
         Debug.Log("Player Leveled Up");
         LevelText.SetText("Level: " + level);
         toggleLevelHUD(true);
-        PauseMenu.isPaused = true;
-        PlayerManager.Instance.ResetPlayerXP(level * 5);
+        SetPauseStatus(true);
+        PlayerManager.Instance.ResetPlayerXP(/*level * 5*/ 1);
         UpdateXPCounter(0);
+    }
+
+    public void SetPauseStatus(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+        }
+        else 
+        {
+            Time.timeScale = 1;
+            isPaused = false;
+        }
+    }
+
+    public bool GameIsPaused()
+    {
+        return isPaused;
     }
 
     public void QuitGame()

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1827295224038593270}
   - component: {fileID: 6028134959268241070}
-  - component: {fileID: 934979267894485825}
   - component: {fileID: 4306704727127317796}
   - component: {fileID: 4077079185193988606}
+  - component: {fileID: 934979267894485825}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 5265058109751273213}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6028134959268241070
 SpriteRenderer:
@@ -88,21 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &934979267894485825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956554678222848035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73e6ac9b60827094a9e62ee27773200c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1.5
-  enemyHealth: 1
-  XPCount: 1
 --- !u!58 &4306704727127317796
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,6 +150,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &934979267894485825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956554678222848035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e6ac9b60827094a9e62ee27773200c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1.5
+  enemyHealth: 1
+  XPCount: 1
+  slider: {fileID: 2990569094364331985}
 --- !u!1 &1838405935418484934
 GameObject:
   m_ObjectHideFlags: 0
