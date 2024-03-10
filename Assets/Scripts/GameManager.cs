@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         LevelText.SetText("Level: " + level);
         toggleLevelHUD(true);
         SetPauseStatus(true);
-        PlayerManager.Instance.ResetPlayerXP(/*level * 5*/ 1);
+        PlayerManager.Instance.ResetPlayerXP(level * 5);
         UpdateXPCounter(0);
     }
 
