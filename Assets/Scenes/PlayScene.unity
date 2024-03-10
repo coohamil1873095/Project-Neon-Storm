@@ -363,9 +363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 956554678222848035, guid: 14211e9a19c527a4290ef4f80c4333f1, type: 3}
-  maxEnemies: 5
-  spawnDistance: 5
-  spawnRate: 3
+  maxEnemies: 20
+  spawnDistance: 10
+  spawnRate: 1
   player: {fileID: 994720675}
 --- !u!4 &336222190
 Transform:
@@ -1275,10 +1275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e85b760af167944a98f0860cc4f28b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeaponDamage: 0.25
+  playerWeaponDamage: 1
   playerWeaponCooldown: 0.25
   fov: 2.9
-  fovAngle: 101
+  fovAngle: 75
 --- !u!114 &994720683
 MonoBehaviour:
   m_ObjectHideFlags: 0
