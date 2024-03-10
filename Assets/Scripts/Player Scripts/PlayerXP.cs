@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerXP : MonoBehaviour
 {
     [SerializeField] private int XPToLevelUp;
+    [SerializeField] private Slider slider;
     private int currentXP = 0;
     
     // Start is called before the first frame update
@@ -25,6 +27,12 @@ public class PlayerXP : MonoBehaviour
     public void AddExperience(int XPVal) 
     {
         currentXP += XPVal;
+        UpdateExperienceBar(currentXP, XPToLevelUp);
+    }
+
+    public void UpdateExperienceBar(float currentVal, float maxVal)
+    {
+        slider.value = currentVal / maxVal;
     }
 
     public int GetCurrentExperience()
@@ -36,5 +44,10 @@ public class PlayerXP : MonoBehaviour
     {
         currentXP = 0;
         XPToLevelUp = newXPGoal;
+    }
+
+    public int GetExperienceGoal()
+    {
+        return XPToLevelUp;
     }
 }
