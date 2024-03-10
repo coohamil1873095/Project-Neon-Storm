@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     private GameObject[] enemies;
     private int enemyIterator = 0;
     private GameObject newEnemy;
+    public Transform player;
     
     void Awake() 
     {
@@ -38,7 +39,7 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position = player.position;
     }
 
     IEnumerator SpawnEnemy()
