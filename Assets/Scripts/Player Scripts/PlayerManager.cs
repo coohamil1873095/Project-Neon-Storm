@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject player;
 
     private PlayerXP playerXP;
+    private PlayerPowers playerPowers;
     
     void Awake() 
     {
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         playerXP = player.GetComponent<PlayerXP>();
+        playerPowers = player.GetComponent<PlayerPowers>();
     }
 
     // Update is called once per frame
@@ -42,5 +44,13 @@ public class PlayerManager : MonoBehaviour
     public void ResetPlayerXPBar() 
     {
         playerXP.UpdateExperienceBar(0, playerXP.GetExperienceGoal());
+    }
+
+    public void ResetPlayer()
+    {
+        ResetPlayerXP(playerXP.GetStartingXPGoal());
+        ResetPlayerXPBar();
+        playerPowers.ResetPlayerPowers();
+        
     }
 }

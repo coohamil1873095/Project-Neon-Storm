@@ -43,6 +43,12 @@ public class PlayerPowers : MonoBehaviour
         Ability2Input();
         AbilityCooldown2(ref currentAbilityCooldown2, powerupCooldown2, ref isAbility2Cooldown, abilityImage2);
     }
+
+    public void ResetPlayerPowers()
+    {
+        //remove powers from player
+    }
+
     private void Ability1Input()
     {
         if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown)
@@ -136,28 +142,30 @@ public class PlayerPowers : MonoBehaviour
         DisableRing();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.CompareTag("Enemy"))
+        if (other.collider.tag == "Enemy")
         {
-            Rigidbody2D enemyRb = other.GetComponent<Rigidbody2D>();
+            Rigidbody2D enemyRb = other.collider.GetComponent<Rigidbody2D>();
             if (enemyRb != null)
             {
                 Vector2 pushDirection = (other.transform.position - transform.position).normalized;
                 enemyRb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
 
                 // Start a coroutine to remove the force after 0.5 seconds
-                StartCoroutine(RemoveForceAfterDuration(enemyRb, pushDirection, 0.35f));
+                StartCoroutine(RemoveForceAfterDuration(other.collider, 0.35f));
             }
         }
     }
 
-    IEnumerator RemoveForceAfterDuration(Rigidbody2D rb, Vector2 forceDirection, float duration)
+    IEnumerator RemoveForceAfterDuration(Collider2D col, float duration)
     {
+        col.enabled = false;
         yield return new WaitForSeconds(duration);
+        col.enabled = true;
 
         // Remove the force applied earlier
-        rb.velocity = Vector2.zero;
+        col.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     // Method to disable the ring

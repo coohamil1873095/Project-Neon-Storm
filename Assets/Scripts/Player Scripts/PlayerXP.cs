@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerXP : MonoBehaviour
 {
-    [SerializeField] private int XPToLevelUp;
+    [SerializeField] private int startingXPGoal;
     [SerializeField] private Slider slider;
+    private int XPToLevelUp;
     private int currentXP = 0;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        XPToLevelUp = startingXPGoal;
     }
 
     // Update is called once per frame
@@ -49,5 +50,10 @@ public class PlayerXP : MonoBehaviour
     public int GetExperienceGoal()
     {
         return XPToLevelUp;
+    }
+
+    public int GetStartingXPGoal()
+    {
+        return startingXPGoal;
     }
 }

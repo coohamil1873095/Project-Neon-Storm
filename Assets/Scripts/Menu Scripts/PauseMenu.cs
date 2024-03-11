@@ -4,28 +4,22 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.isPlaying)
-        {
-            if (GameManager.Instance.GameIsPaused()) {
-                UnPause();
-            }
-            else {
-                GameManager.Instance.SetPauseStatus(true);
-            }
-        }
+        
     }
 
     public void OnClick_Resume() 
     {
         GameManager.Instance.toggleGameHUD(true);
+        GameManager.Instance.toggleAbilityHUD(true);
         UnPause();
     }
     public void OnClick_Options() 
     {
-        MenuManager.OpenMenu(Menu.OPTIONS, gameObject);
+        //MenuManager.OpenMenu(Menu.OPTIONS, gameObject);
+
+        MenuManager.OpenMenu(Menu.OPTIONS, null);
     }
     public void OnClick_MainMenu() 
     {
@@ -38,6 +32,8 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         GameManager.Instance.SetPauseStatus(false);
-        MenuManager.CloseMenu(Menu.PAUSE_MENU);
+        //MenuManager.CloseMenu(Menu.PAUSE_MENU);
+
+        gameObject.SetActive(false);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MenuManager
 {
     public static bool IsInitialized { get; private set; }
-    public static GameObject mainMenu, optionsMenu, creditsMenu, pauseMenu, gameOverMenu;
+    public static GameObject mainMenu, optionsMenu, creditsMenu /*pauseMenu, gameOverMenu*/;
     
     public static void Init()
     {
@@ -13,8 +13,8 @@ public static class MenuManager
         mainMenu = canvas.transform.Find("MainMenu").gameObject;
         optionsMenu = canvas.transform.Find("Options").gameObject;
         creditsMenu = canvas.transform.Find("Credits").gameObject;
-        pauseMenu = canvas.transform.Find("Pause Menu").gameObject;
-        gameOverMenu = canvas.transform.Find("Game Over Menu").gameObject;
+        //pauseMenu = canvas.transform.Find("Pause Menu").gameObject;
+        //gameOverMenu = canvas.transform.Find("Game Over Menu").gameObject;
 
         IsInitialized = true;
     }
@@ -36,16 +36,17 @@ public static class MenuManager
             case Menu.CREDITS:
                 creditsMenu.SetActive(true);
                 break;
-            case Menu.PAUSE_MENU:
-                pauseMenu.SetActive(true);
-                break;
-            case Menu.GAME_OVER:
-                gameOverMenu.SetActive(true);
-                break;
+            // case Menu.PAUSE_MENU:
+            //     pauseMenu.SetActive(true);
+            //     break;
+            // case Menu.GAME_OVER:
+            //     gameOverMenu.SetActive(true);
+            //     break;
         }
 
         if (prevMenu != null) 
         {
+            Debug.Log(prevMenu.name);
             prevMenu.SetActive(false);
         }
     }
@@ -67,12 +68,12 @@ public static class MenuManager
             case Menu.CREDITS:
                 creditsMenu.SetActive(false);
                 break;
-            case Menu.PAUSE_MENU:
-                pauseMenu.SetActive(false);
-                break;
-            case Menu.GAME_OVER:
-                gameOverMenu.SetActive(false);
-                break;
+            // case Menu.PAUSE_MENU:
+            //     pauseMenu.SetActive(false);
+            //     break;
+            // case Menu.GAME_OVER:
+            //     gameOverMenu.SetActive(false);
+            //     break;
         }
     }
 }
