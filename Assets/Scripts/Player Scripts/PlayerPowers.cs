@@ -11,13 +11,20 @@ public class PlayerPowers : MonoBehaviour
     private GameObject ring; // Reference to the instantiated ring
     public float pushForce = 5f;
     public float powerupCooldown = 5f;
+    public float powerupCooldown2 = 5f;
     public float ringUptime = 0.5f;
     private bool isAbility1Cooldown = false;
+    private bool isAbility2Cooldown = false;
 
     [Header("Ability 1")]
     public Image abilityImage1;
     public KeyCode ability1Key;
     private float currentAbilityCooldown;
+
+    [Header("Ability 2")]
+    public Image abilityImage2;
+    public KeyCode ability2Key;
+    private float currentAbilityCooldown2;
 
     void Start()
     {
@@ -26,12 +33,15 @@ public class PlayerPowers : MonoBehaviour
         ring.transform.parent = transform;
 
         abilityImage1.fillAmount = 0;
+        abilityImage2.fillAmount = 0;
     }
 
     void Update()
     {
         Ability1Input();
         AbilityCooldown(ref currentAbilityCooldown, powerupCooldown, ref isAbility1Cooldown, abilityImage1);
+        Ability2Input();
+        AbilityCooldown2(ref currentAbilityCooldown2, powerupCooldown2, ref isAbility2Cooldown, abilityImage2);
     }
     private void Ability1Input()
     {
@@ -44,6 +54,18 @@ public class PlayerPowers : MonoBehaviour
 
         }
     }
+    private void Ability2Input()
+    {
+        if (Input.GetKeyDown(ability2Key) && !isAbility2Cooldown)
+        {
+            Debug.Log("activate!");
+            //ActivatePower2();
+            isAbility2Cooldown = true;
+            currentAbilityCooldown2 = powerupCooldown2;
+
+        }
+    }
+
     void ActivatePower1()
     {
         ring.SetActive(true);
@@ -52,6 +74,31 @@ public class PlayerPowers : MonoBehaviour
     }
 
     private void AbilityCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
+    {
+        if (isCooldown)
+        {
+            currentCooldown -= Time.deltaTime;
+            if (currentCooldown <= 0f)
+            {
+                isCooldown = false;
+                currentCooldown = 0f;
+                if (skillImage != null)
+                {
+                    skillImage.fillAmount = 0f;
+                }
+            }
+            else
+            {
+                if (skillImage != null)
+                {
+                    skillImage.fillAmount = currentCooldown / maxCooldown;
+                }
+            }
+        }
+
+    }
+
+    private void AbilityCooldown2(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
     {
         if (isCooldown)
         {
