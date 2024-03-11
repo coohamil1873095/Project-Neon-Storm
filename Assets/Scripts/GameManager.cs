@@ -7,10 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public static bool isPlaying { get; private set; }
+    public static bool playerWin { get; private set; }
     private bool isPaused;
-    private Canvas gameHUD;
-    private Canvas levelHUD;
-    private Canvas abilityHUD;
+    [SerializeField] private GameObject pauseMenu, gameOverMenu;
+    private Canvas gameHUD, levelHUD, abilityHUD;
     [SerializeField] private TMP_Text LevelText;
     private int level = 1;
 
@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour
         abilityHUD = GameObject.Find("Ability HUD").GetComponent<Canvas>();
         toggleLevelHUD(false);
         isPlaying = true;
+        SetPauseStatus(false);
         GetComponent<TimerController>().StartTimer();
+
+        
     }
 
     // Update is called once per frame
@@ -42,7 +45,9 @@ public class GameManager : MonoBehaviour
             SetPauseStatus(true);
             toggleGameHUD(false);
             toggleAbilityHUD(false);
-            MenuManager.OpenMenu(Menu.PAUSE_MENU, null);
+            //MenuManager.OpenMenu(Menu.PAUSE_MENU, null);
+
+            pauseMenu.SetActive(true);
         }
     }
 
@@ -65,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         level++;
         Debug.Log("Player Leveled Up");
-        LevelText.SetText("Level: " + level);
+        LevelText.SetText("LVL: " + level);
         toggleLevelHUD(true);
         SetPauseStatus(true);
         PlayerManager.Instance.ResetPlayerXP(level * 5);
@@ -93,5 +98,27 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         isPlaying = false;
+        playerWin = false;
+        PlayerManager.Instance.ResetPlayer();
+    }
+
+    public void RestartGame() 
+    {
+        Start();
+    }
+
+    public void EndCurrentGame(bool winStatus)
+    {
+        isPlaying = false;
+        toggleGameHUD(false);
+        toggleLevelHUD(false);
+        toggleAbilityHUD(false);
+        SetPauseStatus(true);
+
+        playerWin = winStatus;
+
+        //MenuManager.OpenMenu(Menu.GAME_OVER, null);
+
+        gameOverMenu.SetActive(true);
     }
 }

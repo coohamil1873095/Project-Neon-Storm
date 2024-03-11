@@ -43,6 +43,12 @@ public class PlayerPowers : MonoBehaviour
         Ability2Input();
         AbilityCooldown2(ref currentAbilityCooldown2, powerupCooldown2, ref isAbility2Cooldown, abilityImage2);
     }
+
+    public void ResetPlayerPowers()
+    {
+        //remove powers from player
+    }
+
     private void Ability1Input()
     {
         if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown)

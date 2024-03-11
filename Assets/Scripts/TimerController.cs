@@ -7,9 +7,20 @@ using System;
 public class TimerController : MonoBehaviour
 {
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private int finishTimeInSecs;
     private TimeSpan timePlaying;
     private bool timerActive = false;
     private float elapsedTime;
+
+    void Update()
+    {
+        if (elapsedTime >= finishTimeInSecs) 
+        {
+            timerActive = false;
+            elapsedTime = 0f;
+            GameManager.Instance.EndCurrentGame(true);
+        }
+    }
 
     public void StartTimer()
     {
