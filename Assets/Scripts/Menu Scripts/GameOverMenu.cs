@@ -20,8 +20,6 @@ public class GameOverMenu : MonoBehaviour
     public void OnClick_Restart() 
     {
         Time.timeScale = 1;
-        //MenuManager.CloseMenu(Menu.GAME_OVER);
-
         gameObject.SetActive(false);
 
         GameManager.Instance.RestartGame();
@@ -29,9 +27,6 @@ public class GameOverMenu : MonoBehaviour
     public void OnClick_MainMenu() 
     {
         Time.timeScale = 1;
-        //mainMenu.GetComponent<MainMenu>().ChangeHighScore(GameManager.highscore);
-        //MenuManager.OpenMenu(Menu.MAIN_MENU, gameObject);
-        
         MenuManager.OpenMenu(Menu.MAIN_MENU, null);
         gameObject.SetActive(false);
 

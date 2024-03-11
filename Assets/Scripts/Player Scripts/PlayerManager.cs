@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     private PlayerXP playerXP;
     private PlayerPowers playerPowers;
+    private PlayerHealth playerHealth;
     
     void Awake() 
     {
@@ -23,12 +24,18 @@ public class PlayerManager : MonoBehaviour
     {
         playerXP = player.GetComponent<PlayerXP>();
         playerPowers = player.GetComponent<PlayerPowers>();
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void DamagePlayerHealth(float damageAmount)
+    {
+        playerHealth.DamagePlayer(damageAmount);
     }
 
     public void GivePlayerXP(int XPVal) 
@@ -51,6 +58,6 @@ public class PlayerManager : MonoBehaviour
         ResetPlayerXP(playerXP.GetStartingXPGoal());
         ResetPlayerXPBar();
         playerPowers.ResetPlayerPowers();
-        
+        playerHealth.ResetPlayerHealth();
     }
 }

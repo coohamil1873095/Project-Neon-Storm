@@ -14,6 +14,7 @@ public class PlayerPowers : MonoBehaviour
     public float powerupCooldown2 = 5f;
     public float ringUptime = 0.5f;
     private bool isAbility1Cooldown = false;
+    private bool isAbility1Active = false;
     private bool isAbility2Cooldown = false;
 
     [Header("Ability 1")]
@@ -138,13 +139,15 @@ public class PlayerPowers : MonoBehaviour
 
     IEnumerator DisableRingAfterDelay(float delay)
     {
+        isAbility1Active = true;
         yield return new WaitForSeconds(delay);
+        isAbility1Active = false;
         DisableRing();
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        if (other.collider.tag == "Enemy")
+        if (other.collider.tag == "Enemy" && isAbility1Active)
         {
             Rigidbody2D enemyRb = other.collider.GetComponent<Rigidbody2D>();
             if (enemyRb != null)
