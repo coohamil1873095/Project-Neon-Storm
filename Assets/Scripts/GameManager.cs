@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             SetPauseStatus(true);
             toggleGameHUD(false);
             toggleAbilityHUD(false);
-            //MenuManager.OpenMenu(Menu.PAUSE_MENU, null);
+            
 
             pauseMenu.SetActive(true);
         }
@@ -116,8 +116,6 @@ public class GameManager : MonoBehaviour
         SetPauseStatus(true);
 
         playerWin = winStatus;
-
-        //MenuManager.OpenMenu(Menu.GAME_OVER, null);
 
         gameOverMenu.SetActive(true);
     }

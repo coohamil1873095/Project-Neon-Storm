@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
   enemyHealth: 3
+  enemyDamage: 5
   XPCount: 1
   slider: {fileID: 2990569094364331985}
 --- !u!1 &1838405935418484934
@@ -290,8 +291,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: -20, y: 0}
+  m_AnchoredPosition: {x: 4.23, y: 0}
+  m_SizeDelta: {x: -1.55, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5563173951938320132
 GameObject:
@@ -507,8 +508,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4.870014, y: 0}
-  m_SizeDelta: {x: 19.74, y: 0}
+  m_AnchoredPosition: {x: -3.0299835, y: 0}
+  m_SizeDelta: {x: 2.71, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &956289829554914278
 CanvasRenderer:
