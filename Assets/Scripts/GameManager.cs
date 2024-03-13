@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
     public static bool isPlaying { get; private set; }
     public static bool playerWin { get; private set; }
     private bool isPaused;
-    [SerializeField] private GameObject pauseMenu, gameOverMenu;
+    [SerializeField] private GameObject pauseMenu, gameOverMenu, levelUI;
+    private AudioSource levelSFX;
+    [SerializeField] private AudioClip levelUpSFX;
     private Canvas gameHUD, levelHUD, abilityHUD;
     [SerializeField] private TMP_Text LevelText;
     private int level = 1;
@@ -26,7 +28,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameHUD = GameObject.Find("Game HUD").GetComponent<Canvas>();
-        levelHUD = GameObject.Find("Level HUD").GetComponent<Canvas>();
+        levelHUD = levelUI.GetComponent<Canvas>();
+        levelSFX = levelUI.GetComponent<AudioSource>();
         abilityHUD = GameObject.Find("Ability HUD").GetComponent<Canvas>();
         toggleLevelHUD(false);
         isPlaying = true;
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player Leveled Up");
         LevelText.SetText("LVL: " + level);
         toggleLevelHUD(true);
+        levelSFX.PlayOneShot(levelUpSFX);
         SetPauseStatus(true);
         PlayerManager.Instance.ResetPlayerXP(level * 5);
     }
