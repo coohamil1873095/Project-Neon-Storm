@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
     [SerializeField] private GameObject EnemyObj;
+    [SerializeField] private GameObject ShooterObj;
     [SerializeField] private int maxEnemies;
     [SerializeField] private float spawnDistance = 5f;
     [SerializeField] private float spawnRate = 3f;
@@ -28,7 +29,14 @@ public class EnemyManager : MonoBehaviour
         enemies = new GameObject[maxEnemies];
         for (int i = 0; i < maxEnemies; i++)
         {
-            enemies[i] = Instantiate(EnemyObj, transform.position, Quaternion.identity);
+            if (i % 10 == 5) 
+            {
+                enemies[i] = Instantiate(ShooterObj, transform.position, Quaternion.identity);
+            }
+            else {
+                enemies[i] = Instantiate(EnemyObj, transform.position, Quaternion.identity);
+            }
+            
             enemies[i].transform.SetParent(GameObject.Find("Enemies").transform);
             enemies[i].SetActive(false);
         }
