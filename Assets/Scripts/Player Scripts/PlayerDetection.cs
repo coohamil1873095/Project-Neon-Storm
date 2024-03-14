@@ -14,18 +14,6 @@ public class PlayerDetection : MonoBehaviour
     private Collider2D[] targets;
     private bool isLeftMouseButtonDown = false;
 
-    private void OnDrawGizmos()
-    {
-        if (isLeftMouseButtonDown)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;
-            mousePosition.y = 0.5f;
-            Handles.color = new Color(1, 0, 0, 0.3f);
-            Handles.DrawSolidArc(transform.position, transform.forward, Quaternion.AngleAxis(-fovAngle / 2f, transform.forward) * transform.up, fovAngle, fov);
-            
-        }
-    }
 
     private void Update()
     {

@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
     public void OnLevelUp()
     {
         level++;
-        Debug.Log("Player Leveled Up");
         LevelText.SetText("LVL: " + level);
         toggleLevelHUD(true);
         levelSFX.PlayOneShot(levelUpSFX);
