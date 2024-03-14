@@ -1625,7 +1625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 956554678222848035, guid: 14211e9a19c527a4290ef4f80c4333f1, type: 3}
-  maxEnemies: 200
+  ShooterObj: {fileID: 732742104703675560, guid: a678b2c93311fb942bef369414228d32, type: 3}
+  maxEnemies: 20
   spawnDistance: 10
   spawnRate: 1
   player: {fileID: 994720675}
@@ -4800,9 +4801,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ringPrefab: {fileID: 1933092500}
   pushForce: 10
-  powerupCooldown: 7
-  powerupCooldown2: 5
-  powerupCooldown3: 10
+  powerupCooldown: 10
+  powerupCooldown2: 7
+  powerupCooldown3: 12
   powerupCooldown4: 30
   ringUptime: 0.5
   ability1Unlocked: 0
@@ -5714,6 +5715,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112420351}
   m_CullTransparentMesh: 1
+--- !u!1 &1116550909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116550910}
+  m_Layer: 0
+  m_Name: Bullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1116550910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116550909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.609187, y: 4.498578, z: -0.12918368}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168753078
 GameObject:
   m_ObjectHideFlags: 0
@@ -6385,7 +6417,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473262753
 GameObject:
@@ -9146,7 +9178,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1933092500 stripped
 GameObject:
@@ -10032,6 +10064,10 @@ PrefabInstance:
     - target: {fileID: 2868971557204937597, guid: e74e1144e7b09e6498107cd63ff844e9, type: 3}
       propertyPath: m_Name
       value: PushPower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868971557204937597, guid: e74e1144e7b09e6498107cd63ff844e9, type: 3}
+      propertyPath: m_TagString
+      value: Ring
       objectReference: {fileID: 0}
     - target: {fileID: 8694044874930598021, guid: e74e1144e7b09e6498107cd63ff844e9, type: 3}
       propertyPath: m_RootOrder
