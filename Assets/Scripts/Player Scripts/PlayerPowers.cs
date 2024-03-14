@@ -18,11 +18,11 @@ public class PlayerPowers : MonoBehaviour
     private bool isAbility1Cooldown = false;
     private bool isAbility1Active = false;
     private bool isAbility2Cooldown = false;
-    private bool isAbility2Active = false;
+    //private bool isAbility2Active = false;
     private bool isAbility3Cooldown = false;
-    private bool isAbility3Active = false;
+    //private bool isAbility3Active = false;
     private bool isAbility4Cooldown = false;
-    private bool isAbility4Active = false;
+    //private bool isAbility4Active = false;
 
 
     [Header("Ability 1")]
@@ -172,7 +172,7 @@ public class PlayerPowers : MonoBehaviour
 
     void ActivatePower3()
     {
-        isAbility3Active = true;
+        //isAbility3Active = true;
 
         // Increase movement speed and damage
         playerMovement.moveSpeed += movementSpeedBoost;
@@ -281,7 +281,7 @@ public class PlayerPowers : MonoBehaviour
         playerMovement.moveSpeed = originalMovementSpeed;
         playerDetection.playerWeaponDamage = originalDamage;
 
-        isAbility3Active = false;
+        //isAbility3Active = false;
     }
 
     IEnumerator StartAbilityCooldown(float cooldown)
@@ -302,12 +302,14 @@ public class PlayerPowers : MonoBehaviour
         pushForce += 1f;
         powerupCooldown -= 0.5f;
         ringUptime += 0.5f;
+        AbilityLevelManager.Instance.Ability1LevelUp();
     }
     public void LevelAb2()
     {
         circleRadius += 0.2f;
         powerupCooldown -= 0.5f;
-        damageAmount += 1;
+        damageAmount += damageAmount * 2 / GameManager.Instance.GetCurrentLevel();
+        AbilityLevelManager.Instance.Ability2LevelUp();
     }
     public void LevelAb3()
     {
@@ -315,34 +317,37 @@ public class PlayerPowers : MonoBehaviour
         damageBoost += 0.5f;
         powerupCooldown3 -= 0.5f;
         abilityDuration += 0.25f;
-
+        AbilityLevelManager.Instance.Ability3LevelUp();
     }
     public void LevelAb4()
     {
-
         UltRadius += 0.5f;
-        ultDamageAmount += 1f;
-        powerupCooldown4 -= 5f;
-
+        ultDamageAmount += ultDamageAmount * 2 / GameManager.Instance.GetCurrentLevel();
+        powerupCooldown4 -= 3f;
+        AbilityLevelManager.Instance.Ability4LevelUp();
     }
     public void UnlockAb1()
     {
         ability1Unlocked = true;
         abilityImage1.fillAmount = 0;
+        AbilityLevelManager.Instance.Ability1LevelUp();
     }
     public void UnlockAb2()
     {
         ability2Unlocked = true;
         abilityImage2.fillAmount = 0;
+        AbilityLevelManager.Instance.Ability2LevelUp();
     }
     public void UnlockAb3()
     {
         ability3Unlocked = true;
         abilityImage3.fillAmount = 0;
+        AbilityLevelManager.Instance.Ability3LevelUp();
     }
     public void UnlockAb4()
     {
         ability4Unlocked = true;
         abilityImage4.fillAmount = 0;
+        AbilityLevelManager.Instance.Ability4LevelUp();
     }
 }

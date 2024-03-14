@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.5
-  enemyHealth: 3
+  enemyHealth: 5
   enemyDamage: 5
   beingDamagedCooldown: 0.25
   XPCount: 1

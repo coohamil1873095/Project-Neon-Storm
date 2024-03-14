@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
         }
 
         curHealth = enemyHealth;
+        UpdateHealthbar(curHealth, enemyHealth);
     }
 
     void Update()
@@ -35,6 +37,14 @@ public class Enemy : MonoBehaviour
             Vector3 directionToPlayer = player.position - transform.position;
             Vector3 normalizedDirection = directionToPlayer.normalized;
             transform.Translate(normalizedDirection * moveSpeed * Time.deltaTime);
+
+            float distX = transform.position.x - player.position.x;
+            float distY = transform.position.y - player.position.y;
+
+            if (Mathf.Abs(distX) >= 13 || Mathf.Abs(distY) >= 8)
+            {
+                transform.position = new Vector2(player.position.x - distX, player.position.y - distY);
+            }
         }
     }
 
@@ -65,8 +75,6 @@ public class Enemy : MonoBehaviour
             EnemyManager.Instance.DestroyEnemy(this);
         }
         UpdateHealthbar(curHealth, enemyHealth);
-
-        
     }
 
     IEnumerator PlayerDamagingCooldown(float cooldown)
@@ -79,6 +87,13 @@ public class Enemy : MonoBehaviour
     public bool EnemyBeingDamaged()
     {
         return isBeingDamaged;
+    }
+
+    public void IncreaseHealth(float addedHealth)
+    {
+        enemyHealth += addedHealth;
+        curHealth += addedHealth;
+        UpdateHealthbar(curHealth, enemyHealth);
     }
 
     public void UpdateHealthbar(float currentVal, float maxVal)
