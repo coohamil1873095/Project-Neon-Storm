@@ -3860,8 +3860,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.013349922, g: 0.08762628, b: 0.9433962, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4265,7 +4265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 948130189f0e27a47920069b9da66cd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4350,8 +4350,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5029,8 +5029,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6840,29 +6840,44 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Sprites: https://assetstore.unity.com/packages/2d/gui/icons/2d-simple-ui-pack-218050
+  m_text: 'Sprites: https://www.vhv.rs/viewpic/mRwowi_coin-golden-goldcoin-s-dollar-pixel-pixels/
 
+    https://opengameart.org/content/topdown-wizard
 
-    Models:
-    https://assetstore.unity.com/packages/3d/environments/lowpoly-rocks-137970
+    https://assetstore.unity.com/packages/2d/gui/icons/free-rpg-fantasy-spell-icons-200511
 
-    https://assetstore.unity.com/packages/3d/vehicles/space/low-poly-spaceships-set-209758
+    https://assetstore.unity.com/packages/2d/characters/slime-enemy-pixel-art-228568
+
+    https://assetstore.unity.com/packages/2d/textures-materials/tiles/25-free-frost-mage-skill-icons-248503
 
 
     Background:
-    https://assetstore.unity.com/packages/2d/environments/pixel-skies-demo-background-pack-226622
+    https://opengameart.org/content/arcade-floor-neon
+
+    https://pxhere.com/en/photo/1631141
 
 
     Music:
-    https://assetstore.unity.com/packages/audio/music/free-casual-relaxing-game-music-pack-262740
+    https://freesound.org/people/SergeQuadrado/sounds/683388/
 
 
-    SFX:
-    https://freesound.org/people/kianda/sounds/328120/
+    SFX: https://freesound.org/people/JavierZumer/sounds/257229/
 
-    https://freesound.org/people/Geoff-Bremner-Audio/sounds/656737/
+    https://freesound.org/people/egomassive/sounds/536741/
 
-    https://freesound.org/people/Duskbreaker/sounds/641486/'
+    https://samplefocus.com/collections/thunders-sound-effects
+
+    https://samplefocus.com/collections/thunders-sound-effects
+
+    https://freesound.org/people/JavierZumer/sounds/257229/
+
+    https://freesound.org/people/egomassive/sounds/536741/
+
+
+    VFX:
+    https://cartooncoffee.itch.io
+
+    https://assetstore.unity.com/packages/tools/particles-effects/lightning-bolt-effect-for-unity-59471'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6871,8 +6886,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.011764706, g: 0.08627451, b: 0.94509804, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6889,8 +6904,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7339,8 +7354,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.013349922, g: 0.08762628, b: 0.9433962, a: 1}
+    rgba: 4294922016
+  m_fontColor: {r: 0.1273585, g: 0.30868667, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7862,7 +7877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000076293945, y: -417}
+  m_AnchoredPosition: {x: 0.000076293945, y: -467}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2360704783428718432
@@ -7981,7 +7996,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 948130189f0e27a47920069b9da66cd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8452,8 +8467,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.011764706, g: 0.08627451, b: 0.94509804, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9253,8 +9268,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.011764706, g: 0.08627451, b: 0.94509804, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9379,7 +9394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 948130189f0e27a47920069b9da66cd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10690,8 +10705,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.013349922, g: 0.08762628, b: 0.9433962, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10827,8 +10842,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.013349922, g: 0.08762628, b: 0.9433962, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11310,8 +11325,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293989891
-  m_fontColor: {r: 0.011764706, g: 0.08627451, b: 0.94509804, a: 1}
+    rgba: 4294922017
+  m_fontColor: {r: 0.12941177, g: 0.30980393, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -11390,7 +11405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 948130189f0e27a47920069b9da66cd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
