@@ -4765,7 +4765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ef56d88b768794dac302b05fc67702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringPrefab: {fileID: 1933092500}
+  ringPrefab: {fileID: 820520032862737001, guid: 8175257a4c0dea64e919eb006bb12942, type: 3}
   pushForce: 10
   powerupCooldown: 10
   powerupCooldown2: 7
@@ -4778,7 +4778,7 @@ MonoBehaviour:
   ability2Unlocked: 0
   abilityImage2: {fileID: 1213001036}
   ability2Key: 113
-  lightningCirclePrefab: {fileID: 7312604009369561270, guid: 4038d2ed0fe89ef4992e41bece615226, type: 3}
+  lightningCirclePrefab: {fileID: 4360716800959397435, guid: f982cf8152704974aa666d94a2e69e75, type: 3}
   circleDuration: 0.25
   circleRadius: 1
   damageAmount: 3
@@ -4788,10 +4788,11 @@ MonoBehaviour:
   movementSpeedBoost: 1
   damageBoost: 1
   abilityDuration: 3
+  buffPrefab: {fileID: 8734066893282779636, guid: 2ef0d9fc6f879e74b97b6a7d99e04672, type: 3}
   ability4Unlocked: 0
   abilityImage4: {fileID: 105610470}
   ability4Key: 114
-  lightningUltimatePrefab: {fileID: 7312604009369561270, guid: 4038d2ed0fe89ef4992e41bece615226, type: 3}
+  lightningUltimatePrefab: {fileID: 1484301691699158345, guid: d30f0b2e81d2096468bead3540399877, type: 3}
   UltDuration: 0.5
   UltRadius: 5
   ultDamageAmount: 20
@@ -9228,11 +9229,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1933092500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2868971557204937597, guid: e74e1144e7b09e6498107cd63ff844e9, type: 3}
-  m_PrefabInstance: {fileID: 2171306472981366134}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1933092502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8694044874930598021, guid: e74e1144e7b09e6498107cd63ff844e9, type: 3}

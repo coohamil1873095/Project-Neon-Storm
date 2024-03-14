@@ -53,6 +53,8 @@ public class PlayerPowers : MonoBehaviour
     private float originalDamage;
     private PlayerMove playerMovement;
     private PlayerDetection playerDetection;
+    public GameObject buffPrefab;
+    private GameObject buffVFX;
 
     [Header("Ability 4")]
     public bool ability4Unlocked = false;
@@ -71,6 +73,10 @@ public class PlayerPowers : MonoBehaviour
         ring = Instantiate(ringPrefab, transform.position, Quaternion.identity);
         ring.SetActive(false);
         ring.transform.parent = transform;
+
+        buffVFX = Instantiate(buffPrefab, transform.position, Quaternion.identity);
+        buffVFX.SetActive(false);
+        buffVFX.transform.parent = transform;
 
         playerMovement = GetComponent<PlayerMove>();
         playerDetection = GetComponent<PlayerDetection>();
@@ -190,7 +196,7 @@ public class PlayerPowers : MonoBehaviour
         mousePosition.z = 0f;
         GameObject lightningCircle = Instantiate(lightningCirclePrefab, mousePosition, Quaternion.identity);
 
-        lightningCircle.transform.localScale = new Vector3(circleRadius * 2f, circleRadius * 2f, 1f);
+        lightningCircle.transform.localScale = new Vector3(circleRadius * 0.8f, circleRadius * 0.8f, 1f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, circleRadius);
         foreach (Collider2D collider in colliders)
         {
@@ -211,6 +217,8 @@ public class PlayerPowers : MonoBehaviour
         // Increase movement speed and damage
         playerMovement.moveSpeed += movementSpeedBoost;
         playerDetection.playerWeaponDamage += damageBoost;
+        buffVFX.SetActive(true);
+        StartCoroutine(DisableBuffAfterDelay(abilityDuration));
 
         // Start ability duration and cooldown timers
         StartCoroutine(DisableAbilityAfterDuration(abilityDuration));
@@ -220,7 +228,7 @@ public class PlayerPowers : MonoBehaviour
     {
         // Spawn the blast effect at the player's position
         GameObject blastEffect = Instantiate(lightningUltimatePrefab, transform.position, Quaternion.identity);
-        blastEffect.transform.localScale = new Vector3(UltRadius * 2f, UltRadius * 2f, 1f);
+        blastEffect.transform.localScale = new Vector3(UltRadius * 0.35f, UltRadius * 0.35f, 1f);
         // Detect enemies within the blast radius and damage them
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, UltRadius);
         foreach (Collider2D collider in colliders)
@@ -279,6 +287,14 @@ public class PlayerPowers : MonoBehaviour
         yield return new WaitForSeconds(delay);
         isAbility1Active = false;
         DisableRing();
+    }
+
+    IEnumerator DisableBuffAfterDelay(float delay)
+    {
+        //isAbility3Active = true;
+        yield return new WaitForSeconds(delay);
+        //isAbility3Active = false;
+        buffVFX.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
