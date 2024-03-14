@@ -60,6 +60,13 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void IncreaseEnemyHealth(float addedHealth)
+    {
+        foreach (GameObject enemy in enemies) {
+            enemy.GetComponent<Enemy>().IncreaseHealth(addedHealth);
+        }
+    }
+
     public void DestroyEnemy(Enemy enemy) 
     {
         enemy.gameObject.SetActive(false);

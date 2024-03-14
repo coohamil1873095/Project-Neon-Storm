@@ -79,12 +79,17 @@ public class GameManager : MonoBehaviour
         toggleLevelHUD(true);
         levelSFX.PlayOneShot(levelUpSFX);
         SetPauseStatus(true);
-        PlayerManager.Instance.ResetPlayerXP(level * 5);
+        PlayerManager.Instance.ResetPlayerXP(level * 5); // level * 5
         if (level == 5)
         {
             ultUnlock.gameObject.SetActive(true);
-
         }
+        EnemyManager.Instance.IncreaseEnemyHealth(level / 2);
+    }
+
+    public int GetCurrentLevel()
+    {
+        return level;
     }
 
     public void SetPauseStatus(bool pauseStatus)
