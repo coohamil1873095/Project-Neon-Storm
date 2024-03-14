@@ -7,7 +7,7 @@ public class AbilityLevelManager : MonoBehaviour
     public static AbilityLevelManager Instance { get; private set; }
     [SerializeField] private int Ability1MaxLevel, Ability2MaxLevel, Ability3MaxLevel, Ability4MaxLevel;
     [SerializeField] private GameObject Ability1Blocker, Ability2Blocker, Ability3Blocker, Ability4Blocker;
-    private int ability1Level, ability2Level, ability3Level, ability4Level = 0;
+    private int ability1Level, ability2Level, ability3Level, ability4Level;
 
     
     void Awake()

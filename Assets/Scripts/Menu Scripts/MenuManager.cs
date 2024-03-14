@@ -5,7 +5,7 @@ using UnityEngine;
 public static class MenuManager
 {
     public static bool IsInitialized { get; private set; }
-    public static GameObject mainMenu, optionsMenu, creditsMenu;
+    public static GameObject mainMenu, optionsMenu, creditsMenu, shopMenu;
     
     public static void Init()
     {
@@ -13,6 +13,7 @@ public static class MenuManager
         mainMenu = canvas.transform.Find("MainMenu").gameObject;
         optionsMenu = canvas.transform.Find("Options").gameObject;
         creditsMenu = canvas.transform.Find("Credits").gameObject;
+        shopMenu = canvas.transform.Find("Shop").gameObject;
 
         IsInitialized = true;
     }
@@ -34,11 +35,13 @@ public static class MenuManager
             case Menu.CREDITS:
                 creditsMenu.SetActive(true);
                 break;
+            case Menu.SHOP:
+                shopMenu.SetActive(true);
+                break;
         }
 
         if (prevMenu != null) 
         {
-            Debug.Log(prevMenu.name);
             prevMenu.SetActive(false);
         }
     }
@@ -59,6 +62,9 @@ public static class MenuManager
                 break;
             case Menu.CREDITS:
                 creditsMenu.SetActive(false);
+                break;
+            case Menu.SHOP:
+                shopMenu.SetActive(false);
                 break;
         }
     }

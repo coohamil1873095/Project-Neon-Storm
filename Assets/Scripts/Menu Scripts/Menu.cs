@@ -7,6 +7,5 @@ public enum Menu
     MAIN_MENU,
     OPTIONS,
     CREDITS,
-    PAUSE_MENU,
-    GAME_OVER
+    SHOP
 }
