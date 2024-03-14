@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     private PlayerXP playerXP;
     private PlayerPowers playerPowers;
     private PlayerHealth playerHealth;
+    private PlayerDetection playerDetection;
+    private PlayerMove playerMove;
     
     void Awake() 
     {
@@ -25,12 +27,21 @@ public class PlayerManager : MonoBehaviour
         playerXP = player.GetComponent<PlayerXP>();
         playerPowers = player.GetComponent<PlayerPowers>();
         playerHealth = player.GetComponent<PlayerHealth>();
+        playerDetection = player.GetComponent<PlayerDetection>();
+        playerMove = player.GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ApplyPlayerUpgrades(float healthGain, float moveSpeedGain, float weaponDamageGain, float weaponSpreadGain, float weaponRangeGain)
+    {
+        playerHealth.ApplyHealthUpgrade(healthGain);
+        playerMove.ApplyMoveSpeedUpgrade(moveSpeedGain);
+        playerDetection.ApplyWeaponUpgrade(weaponDamageGain, weaponSpreadGain, weaponRangeGain);
     }
 
     public void DamagePlayerHealth(float damageAmount)

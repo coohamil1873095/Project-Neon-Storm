@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private int maxEnemies;
     [SerializeField] private float spawnDistance = 5f;
     [SerializeField] private float spawnRate = 3f;
+    [SerializeField] private float coinChance;
     private GameObject[] enemies;
     private int enemyIterator = 0;
     private GameObject newEnemy;
@@ -50,6 +51,11 @@ public class EnemyManager : MonoBehaviour
         transform.position = player.position;
     }
 
+    public void ApplyEnemyCoinGain(float coinGain)
+    {
+        coinChance += coinChance * coinGain / 10;
+    }
+
     IEnumerator SpawnEnemy()
     {
         while (true) 
@@ -78,5 +84,10 @@ public class EnemyManager : MonoBehaviour
     public void DestroyEnemy(Enemy enemy) 
     {
         enemy.gameObject.SetActive(false);
+        int rand = Random.Range(1, 101);
+        Debug.Log(coinChance + " " + rand);
+        if (rand <= coinChance) {
+            GameManager.Instance.GainCoin();
+        }
     }
 }

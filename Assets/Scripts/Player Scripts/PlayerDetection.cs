@@ -64,6 +64,13 @@ public class PlayerDetection : MonoBehaviour
         }
     }
 
+    public void ApplyWeaponUpgrade(float weaponDamageGain, float weaponSpreadGain, float weaponRangeGain)
+    {
+        playerWeaponDamage += playerWeaponDamage * weaponDamageGain / 10;
+        fovAngle += fovAngle * weaponSpreadGain / 20;
+        fov += fov * weaponRangeGain / 10;
+    }
+
     IEnumerator ApplyDamage(Collider2D col)
     {
         col.GetComponent<Enemy>().DamageEnemy(playerWeaponDamage);

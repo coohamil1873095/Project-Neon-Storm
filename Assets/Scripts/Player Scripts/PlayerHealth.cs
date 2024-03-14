@@ -23,6 +23,11 @@ public class PlayerHealth : MonoBehaviour
             GameManager.Instance.EndCurrentGame(false);
     }
 
+    public void ApplyHealthUpgrade(float healthGain)
+    {
+        maxHealth += maxHealth * healthGain / 10;
+    }
+
     public void DamagePlayer(float damageAmount) 
     {
         currentHealth -= damageAmount;

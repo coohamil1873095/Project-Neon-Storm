@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip levelUpSFX;
     private Canvas gameHUD, levelHUD, abilityHUD;
     [SerializeField] private TMP_Text LevelText;
+    [SerializeField] private TMP_Text CoinsText;
     private int level = 1;
 
     void Awake()
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         SetPauseStatus(false);
         GetComponent<TimerController>().StartTimer();
 
-
+        ApplyUpgrades();
     }
 
     // Update is called once per frame
@@ -51,9 +52,27 @@ public class GameManager : MonoBehaviour
             toggleGameHUD(false);
             toggleAbilityHUD(false);
 
-
             pauseMenu.SetActive(true);
         }
+
+        CoinsText.SetText("Coins: " + ShopManager.Instance.GetTotalCoins());
+    }
+
+    public void ApplyUpgrades()
+    {
+        PlayerManager.Instance.ApplyPlayerUpgrades(
+            ShopManager.Instance.GetHealthGain(), 
+            ShopManager.Instance.GetMoveSpeedGain(), 
+            ShopManager.Instance.GetWeaponDamageGain(), 
+            ShopManager.Instance.GetWeaponSpreadGain(), 
+            ShopManager.Instance.GetWeaponRangeGain()
+        );
+
+    }
+
+    public void GainCoin()
+    {
+        ShopManager.Instance.AddCoinToTotal();
     }
 
     public void toggleGameHUD(bool activeStatus)
@@ -85,6 +104,7 @@ public class GameManager : MonoBehaviour
             ultUnlock.gameObject.SetActive(true);
         }
         EnemyManager.Instance.IncreaseEnemyHealth(level / 2);
+        ShopManager.Instance.AddCoinToTotal();
     }
 
     public int GetCurrentLevel()

@@ -18,11 +18,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (!GameManager.Instance.GameIsPaused())
         {
-            // float horizontalInput = Input.GetAxis("Horizontal");
-            // float verticalInput = Input.GetAxis("Vertical");
-            // Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
-            // rb.AddForce(movement * moveSpeed);
-
             moveInput.x = Input.GetAxisRaw("Horizontal");
             moveInput.y = Input.GetAxisRaw("Vertical");
 
@@ -31,5 +26,10 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = moveInput * moveSpeed;
         }
 
+    }
+
+    public void ApplyMoveSpeedUpgrade(float moveSpeedGain)
+    {
+        moveSpeed += moveSpeed * moveSpeedGain / 10;
     }
 }

@@ -36,10 +36,39 @@ public class ShopManager : MonoBehaviour
     {
         return totalCoins;
     }
+    public void AddCoinToTotal()
+    {
+        totalCoins += 1;
+    }
 
     public void RemoveCoins(int coins)
     {
         totalCoins -= coins;
+    }
+
+    public float GetHealthGain()
+    {
+        return totalHealthGain;
+    }
+    public float GetMoveSpeedGain()
+    {
+        return totalMoveSpeedGain;
+    }
+    public float GetWeaponDamageGain()
+    {
+        return totalWeaponDamageGain;
+    }
+    public float GetWeaponSpreadGain()
+    {
+        return totalWeaponSpreadGain;
+    }
+    public float GetWeaponRangeGain()
+    {
+        return totalWeaponRangeGain;
+    }
+    public float GetCoinGain()
+    {
+        return totalCoinGain;
     }
 
     public int PurchasedHealth(int cost)
