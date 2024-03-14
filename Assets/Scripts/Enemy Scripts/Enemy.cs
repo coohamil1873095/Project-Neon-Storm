@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float enemyHealth;
     [SerializeField] private float enemyDamage;
+    [SerializeField] private float beingDamagedCooldown; 
     [SerializeField] private int XPCount;
     [SerializeField] private Slider slider;
     private float curHealth;
     private Transform player;
-    private bool isDamaging;
+    private bool isBeingDamaged = false;
+    private bool isDamagingPlayer = false;
 
     void Start()
     {
@@ -38,7 +40,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other) 
     {
-        if (other.transform.tag == "Player" && !isDamaging)
+        if (other.transform.tag == "Player" && !isDamagingPlayer)
         {
             StartCoroutine(DamageCooldown());
             PlayerManager.Instance.DamagePlayerHealth(enemyDamage);
@@ -47,14 +49,15 @@ public class Enemy : MonoBehaviour
 
     IEnumerator DamageCooldown()
     {
-        isDamaging = true;
+        isDamagingPlayer = true;
         yield return new WaitForSeconds(0.5f);
-        isDamaging = false;
+        isDamagingPlayer = false;
     }
 
     public void DamageEnemy(float damageVal) 
     {
         curHealth -= damageVal;
+        StartCoroutine(PlayerDamagingCooldown(beingDamagedCooldown));
         if (curHealth <= 0) 
         {
             ResetEnemy();
@@ -62,6 +65,20 @@ public class Enemy : MonoBehaviour
             EnemyManager.Instance.DestroyEnemy(this);
         }
         UpdateHealthbar(curHealth, enemyHealth);
+
+        
+    }
+
+    IEnumerator PlayerDamagingCooldown(float cooldown)
+    {
+        isBeingDamaged = true;
+        yield return new WaitForSeconds(cooldown);
+        isBeingDamaged = false;
+    }
+
+    public bool EnemyBeingDamaged()
+    {
+        return isBeingDamaged;
     }
 
     public void UpdateHealthbar(float currentVal, float maxVal)
@@ -72,6 +89,7 @@ public class Enemy : MonoBehaviour
     private void ResetEnemy() 
     {
         curHealth = enemyHealth;
+        isBeingDamaged = false;
         UpdateHealthbar(enemyHealth, enemyHealth);
     }
 }
