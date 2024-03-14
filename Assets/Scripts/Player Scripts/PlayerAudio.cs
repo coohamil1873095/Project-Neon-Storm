@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerAudio : MonoBehaviour
 {
     public AudioClip shootingClip;
@@ -24,7 +23,7 @@ public class PlayerAudio : MonoBehaviour
         {
             m_AudioSource.PlayOneShot(shootingClip);
         }
-            if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             m_AudioSource.Stop();
         }
