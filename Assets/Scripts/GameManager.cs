@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static bool playerWin { get; private set; }
     private bool isPaused;
     [SerializeField] private GameObject pauseMenu, gameOverMenu, levelUI;
+    [SerializeField] public Button ultUnlock;
     private AudioSource levelSFX;
     [SerializeField] private AudioClip levelUpSFX;
     private Canvas gameHUD, levelHUD, abilityHUD;
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour
         SetPauseStatus(false);
         GetComponent<TimerController>().StartTimer();
 
-        
+
     }
 
     // Update is called once per frame
@@ -48,7 +50,7 @@ public class GameManager : MonoBehaviour
             SetPauseStatus(true);
             toggleGameHUD(false);
             toggleAbilityHUD(false);
-            
+
 
             pauseMenu.SetActive(true);
         }
@@ -78,6 +80,11 @@ public class GameManager : MonoBehaviour
         levelSFX.PlayOneShot(levelUpSFX);
         SetPauseStatus(true);
         PlayerManager.Instance.ResetPlayerXP(level * 5);
+        if (level == 5)
+        {
+            ultUnlock.gameObject.SetActive(true);
+
+        }
     }
 
     public void SetPauseStatus(bool pauseStatus)
@@ -87,7 +94,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             isPaused = true;
         }
-        else 
+        else
         {
             Time.timeScale = 1;
             isPaused = false;
@@ -106,7 +113,7 @@ public class GameManager : MonoBehaviour
         PlayerManager.Instance.ResetPlayer();
     }
 
-    public void RestartGame() 
+    public void RestartGame()
     {
         Start();
     }

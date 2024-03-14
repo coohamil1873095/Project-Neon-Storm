@@ -11,21 +11,58 @@ public class PlayerPowers : MonoBehaviour
     private GameObject ring; // Reference to the instantiated ring
     public float pushForce = 5f;
     public float powerupCooldown = 5f;
-    public float powerupCooldown2 = 5f;
+    public float powerupCooldown2 = 10f;
+    public float powerupCooldown3 = 10f;
+    public float powerupCooldown4 = 60f;
     public float ringUptime = 0.5f;
     private bool isAbility1Cooldown = false;
     private bool isAbility1Active = false;
     private bool isAbility2Cooldown = false;
+    private bool isAbility2Active = false;
+    private bool isAbility3Cooldown = false;
+    private bool isAbility3Active = false;
+    private bool isAbility4Cooldown = false;
+    private bool isAbility4Active = false;
+
 
     [Header("Ability 1")]
+    public bool ability1Unlocked = false;
     public Image abilityImage1;
     public KeyCode ability1Key;
     private float currentAbilityCooldown;
 
     [Header("Ability 2")]
+    public bool ability2Unlocked = false;
     public Image abilityImage2;
     public KeyCode ability2Key;
     private float currentAbilityCooldown2;
+    public GameObject lightningCirclePrefab;
+    public float circleDuration = 1f;
+    public float circleRadius = 3f;
+    public float damageAmount = 1.5f;
+
+    [Header("Ability 3")]
+    public bool ability3Unlocked = false;
+    public Image abilityImage3;
+    public KeyCode ability3Key;
+    private float currentAbilityCooldown3;
+    public float movementSpeedBoost = 1f;
+    public float damageBoost = 1f;
+    public float abilityDuration = 3f;
+    private float originalMovementSpeed;
+    private float originalDamage;
+    private PlayerMove playerMovement;
+    private PlayerDetection playerDetection;
+
+    [Header("Ability 4")]
+    public bool ability4Unlocked = false;
+    public Image abilityImage4;
+    public KeyCode ability4Key;
+    private float currentAbilityCooldown4;
+    public GameObject lightningUltimatePrefab;
+    public float UltDuration = 1f;
+    public float UltRadius = 3f;
+    public float ultDamageAmount = 1.5f;
 
     void Start()
     {
@@ -33,8 +70,15 @@ public class PlayerPowers : MonoBehaviour
         ring.SetActive(false);
         ring.transform.parent = transform;
 
-        abilityImage1.fillAmount = 0;
-        abilityImage2.fillAmount = 0;
+        playerMovement = GetComponent<PlayerMove>();
+        playerDetection = GetComponent<PlayerDetection>();
+        originalMovementSpeed = playerMovement.moveSpeed;
+        originalDamage = playerDetection.playerWeaponDamage;
+
+        abilityImage1.fillAmount = 100;
+        abilityImage2.fillAmount = 100;
+        abilityImage3.fillAmount = 100;
+        abilityImage4.fillAmount = 100;
     }
 
     void Update()
@@ -42,7 +86,11 @@ public class PlayerPowers : MonoBehaviour
         Ability1Input();
         AbilityCooldown(ref currentAbilityCooldown, powerupCooldown, ref isAbility1Cooldown, abilityImage1);
         Ability2Input();
-        AbilityCooldown2(ref currentAbilityCooldown2, powerupCooldown2, ref isAbility2Cooldown, abilityImage2);
+        AbilityCooldown(ref currentAbilityCooldown2, powerupCooldown2, ref isAbility2Cooldown, abilityImage2);
+        Ability3Input();
+        AbilityCooldown(ref currentAbilityCooldown3, powerupCooldown3, ref isAbility3Cooldown, abilityImage3);
+        Ability4Input();
+        AbilityCooldown(ref currentAbilityCooldown4, powerupCooldown4, ref isAbility4Cooldown, abilityImage4);
     }
 
     public void ResetPlayerPowers()
@@ -52,7 +100,7 @@ public class PlayerPowers : MonoBehaviour
 
     private void Ability1Input()
     {
-        if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown)
+        if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown && ability1Unlocked)
         {
             Debug.Log("activate!");
             ActivatePower1();
@@ -63,12 +111,34 @@ public class PlayerPowers : MonoBehaviour
     }
     private void Ability2Input()
     {
-        if (Input.GetKeyDown(ability2Key) && !isAbility2Cooldown)
+        if (Input.GetKeyDown(ability2Key) && !isAbility2Cooldown && ability2Unlocked)
         {
             Debug.Log("activate!");
-            //ActivatePower2();
+            ActivatePower2();
             isAbility2Cooldown = true;
             currentAbilityCooldown2 = powerupCooldown2;
+
+        }
+    }
+    private void Ability3Input()
+    {
+        if (Input.GetKeyDown(ability3Key) && !isAbility3Cooldown && ability3Unlocked)
+        {
+            Debug.Log("activate!");
+            ActivatePower3();
+            isAbility3Cooldown = true;
+            currentAbilityCooldown3 = powerupCooldown3;
+
+        }
+    }
+    private void Ability4Input()
+    {
+        if (Input.GetKeyDown(ability4Key) && !isAbility4Cooldown && ability4Unlocked)
+        {
+            Debug.Log("activate!");
+            ActivatePower4();
+            isAbility4Cooldown = true;
+            currentAbilityCooldown4 = powerupCooldown4;
 
         }
     }
@@ -77,35 +147,61 @@ public class PlayerPowers : MonoBehaviour
     {
         ring.SetActive(true);
         StartCoroutine(DisableRingAfterDelay(ringUptime));
-        //StartCoroutine(PowerupCooldown());
     }
 
-    private void AbilityCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
+
+    void ActivatePower2()
     {
-        if (isCooldown)
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+        GameObject lightningCircle = Instantiate(lightningCirclePrefab, mousePosition, Quaternion.identity);
+
+        lightningCircle.transform.localScale = new Vector3(circleRadius * 2f, circleRadius * 2f, 1f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, circleRadius);
+        foreach (Collider2D collider in colliders)
         {
-            currentCooldown -= Time.deltaTime;
-            if (currentCooldown <= 0f)
+            if (collider.CompareTag("Enemy"))
             {
-                isCooldown = false;
-                currentCooldown = 0f;
-                if (skillImage != null)
-                {
-                    skillImage.fillAmount = 0f;
-                }
-            }
-            else
-            {
-                if (skillImage != null)
-                {
-                    skillImage.fillAmount = currentCooldown / maxCooldown;
-                }
+                collider.GetComponent<Enemy>().DamageEnemy(damageAmount);
             }
         }
 
+        // Remove the lightning circle after a certain duration
+        StartCoroutine(DestroyAfterDelay(lightningCircle, circleDuration));
     }
 
-    private void AbilityCooldown2(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
+    void ActivatePower3()
+    {
+        isAbility3Active = true;
+
+        // Increase movement speed and damage
+        playerMovement.moveSpeed += movementSpeedBoost;
+        playerDetection.playerWeaponDamage += damageBoost;
+
+        // Start ability duration and cooldown timers
+        StartCoroutine(DisableAbilityAfterDuration(abilityDuration));
+        StartCoroutine(StartAbilityCooldown(powerupCooldown3));
+    }
+    void ActivatePower4()
+    {
+        // Spawn the blast effect at the player's position
+        GameObject blastEffect = Instantiate(lightningUltimatePrefab, transform.position, Quaternion.identity);
+        blastEffect.transform.localScale = new Vector3(UltRadius * 2f, UltRadius * 2f, 1f);
+        // Detect enemies within the blast radius and damage them
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, UltRadius);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                collider.GetComponent<Enemy>().DamageEnemy(ultDamageAmount);
+            }
+        }
+
+        // Remove the blast effect after a certain duration
+        StartCoroutine(DestroyAfterDelay(blastEffect, UltDuration));
+    }
+
+    private void AbilityCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage)
     {
         if (isCooldown)
         {
@@ -137,6 +233,12 @@ public class PlayerPowers : MonoBehaviour
         canActivatePower = true;
     }*/
 
+    IEnumerator DestroyAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
+    }
+
     IEnumerator DisableRingAfterDelay(float delay)
     {
         isAbility1Active = true;
@@ -145,7 +247,7 @@ public class PlayerPowers : MonoBehaviour
         DisableRing();
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.tag == "Enemy" && isAbility1Active)
         {
@@ -171,6 +273,24 @@ public class PlayerPowers : MonoBehaviour
         col.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
+    IEnumerator DisableAbilityAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        // Reset movement speed and damage
+        playerMovement.moveSpeed = originalMovementSpeed;
+        playerDetection.playerWeaponDamage = originalDamage;
+
+        isAbility3Active = false;
+    }
+
+    IEnumerator StartAbilityCooldown(float cooldown)
+    {
+        isAbility3Cooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isAbility3Cooldown = false;
+    }
+
     // Method to disable the ring
     void DisableRing()
     {
@@ -180,7 +300,49 @@ public class PlayerPowers : MonoBehaviour
     public void LevelPush()
     {
         pushForce += 1f;
-        powerupCooldown -= 1f;
+        powerupCooldown -= 0.5f;
         ringUptime += 0.5f;
+    }
+    public void LevelAb2()
+    {
+        circleRadius += 0.2f;
+        powerupCooldown -= 0.5f;
+        damageAmount += 1;
+    }
+    public void LevelAb3()
+    {
+        movementSpeedBoost += 0.5f;
+        damageBoost += 0.5f;
+        powerupCooldown3 -= 0.5f;
+        abilityDuration += 0.25f;
+
+    }
+    public void LevelAb4()
+    {
+
+        UltRadius += 0.5f;
+        ultDamageAmount += 1f;
+        powerupCooldown4 -= 5f;
+
+    }
+    public void UnlockAb1()
+    {
+        ability1Unlocked = true;
+        abilityImage1.fillAmount = 0;
+    }
+    public void UnlockAb2()
+    {
+        ability2Unlocked = true;
+        abilityImage2.fillAmount = 0;
+    }
+    public void UnlockAb3()
+    {
+        ability3Unlocked = true;
+        abilityImage3.fillAmount = 0;
+    }
+    public void UnlockAb4()
+    {
+        ability4Unlocked = true;
+        abilityImage4.fillAmount = 0;
     }
 }

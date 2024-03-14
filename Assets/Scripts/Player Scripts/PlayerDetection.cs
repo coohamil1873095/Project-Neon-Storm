@@ -5,8 +5,10 @@ using UnityEditor;
 
 public class PlayerDetection : MonoBehaviour
 {
-    [SerializeField] private float playerWeaponDamage;
+    [SerializeField] public float playerWeaponDamage;
     [SerializeField] private float playerWeaponCooldown;
+    [SerializeField] public GameObject lightningEffect;
+    [SerializeField] public GameObject lightningEffectEnd;
     public float fov;   // How far you want the cone to extend from the player
     [Range(0, 360)] public float fovAngle;      // Size of cone (in degrees)
     private Collider2D target;
@@ -17,8 +19,12 @@ public class PlayerDetection : MonoBehaviour
     {
         if (isLeftMouseButtonDown)
         {
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
+            mousePosition.y = 0.5f;
             Handles.color = new Color(1, 0, 0, 0.3f);
             Handles.DrawSolidArc(transform.position, transform.forward, Quaternion.AngleAxis(-fovAngle / 2f, transform.forward) * transform.up, fovAngle, fov);
+            lightningEffect.SetActive(true);
         }
     }
 
@@ -30,6 +36,7 @@ public class PlayerDetection : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))  // Left mouse button is released
         {
+            lightningEffect.SetActive(false);
             isLeftMouseButtonDown = false;
         }
 
@@ -42,10 +49,11 @@ public class PlayerDetection : MonoBehaviour
                     transform.up,
                     target.transform.position - transform.position);
 
+
                 if (Mathf.Abs(signedAngle) < fovAngle / 2 && !dmgActive)
                 {
                     StartCoroutine(ApplyDamage());
-                    
+                    lightningEffectEnd.transform.position = target.transform.position;
                 }
             }
         }
