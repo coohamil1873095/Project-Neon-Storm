@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyObj: {fileID: 956554678222848035, guid: 14211e9a19c527a4290ef4f80c4333f1, type: 3}
   ShooterObj: {fileID: 732742104703675560, guid: a678b2c93311fb942bef369414228d32, type: 3}
-  maxEnemies: 20
+  maxEnemies: 200
   spawnDistance: 10
   spawnRate: 1
   coinChance: 10
@@ -5027,7 +5027,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 2719921568587774901, guid: 1597e4b80a49fe6468f159fff3df1f5c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.326
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5123,7 +5123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db999d1be41b4ed5a6ad40fabd3289f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingClip: {fileID: 8300000, guid: ecb6fabe7ff284f50a179159ab7d3fdd, type: 3}
+  shootingClip: {fileID: 8300000, guid: e51e0a50ae5d7407fb5143fa1478b15b, type: 3}
+  Ability1Clip: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
+  Ability2Clip: {fileID: 8300000, guid: 3cba4bbb25bd44259b3d529eeebfe526, type: 3}
+  Ability3Clip: {fileID: 8300000, guid: 80f6b1005c2f747b1935d7a6b1fd0ce0, type: 3}
+  Ability4Clip: {fileID: 8300000, guid: ecf7f252b91494ac08b78d0a7da84a1a, type: 3}
+  noAbilityClip: {fileID: 8300000, guid: 22d048def4e5b4e7cab06474a3dd78ec, type: 3}
 --- !u!1 &1010796535
 GameObject:
   m_ObjectHideFlags: 0
