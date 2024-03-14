@@ -85,7 +85,7 @@ public class EnemyManager : MonoBehaviour
     {
         enemy.gameObject.SetActive(false);
         int rand = Random.Range(1, 101);
-        Debug.Log(coinChance + " " + rand);
+        //Debug.Log(coinChance + " " + rand);
         if (rand <= coinChance) {
             GameManager.Instance.GainCoin();
         }

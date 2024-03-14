@@ -4,6 +4,11 @@ using UnityEngine;
 public class PlayerAudio : MonoBehaviour
 {
     public AudioClip shootingClip;
+    public AudioClip Ability1Clip;
+    public AudioClip Ability2Clip;
+    public AudioClip Ability3Clip;
+    public AudioClip Ability4Clip;
+    public AudioClip noAbilityClip;
     private AudioSource m_AudioSource;
     // Start is called before the first frame update
     void Start()
@@ -27,5 +32,10 @@ public class PlayerAudio : MonoBehaviour
         {
             m_AudioSource.Stop();
         }
+    }
+
+    public void playSound(AudioClip clip)
+    {
+        m_AudioSource.PlayOneShot(clip);
     }
 }

@@ -64,6 +64,8 @@ public class PlayerPowers : MonoBehaviour
     public float UltRadius = 3f;
     public float ultDamageAmount = 1.5f;
 
+    private PlayerAudio m_SFX;
+
     void Start()
     {
         ring = Instantiate(ringPrefab, transform.position, Quaternion.identity);
@@ -79,6 +81,8 @@ public class PlayerPowers : MonoBehaviour
         abilityImage2.fillAmount = 100;
         abilityImage3.fillAmount = 100;
         abilityImage4.fillAmount = 100;
+
+        m_SFX = GetComponent<PlayerAudio>();
     }
 
     void Update()
@@ -100,46 +104,76 @@ public class PlayerPowers : MonoBehaviour
 
     private void Ability1Input()
     {
-        if (Input.GetKeyDown(ability1Key) && !isAbility1Cooldown && ability1Unlocked)
+        if (Input.GetKeyDown(ability1Key) && ability1Unlocked)
         {
-            Debug.Log("activate!");
-            ActivatePower1();
-            isAbility1Cooldown = true;
-            currentAbilityCooldown = powerupCooldown;
-
+            if (!isAbility1Cooldown)
+            {
+                //Debug.Log("activate!");
+                ActivatePower1();
+                m_SFX.playSound(m_SFX.Ability1Clip);
+                isAbility1Cooldown = true;
+                currentAbilityCooldown = powerupCooldown;
+            }
+            else
+            {
+                m_SFX.playSound(m_SFX.noAbilityClip);
+            }
         }
     }
     private void Ability2Input()
     {
-        if (Input.GetKeyDown(ability2Key) && !isAbility2Cooldown && ability2Unlocked)
+        if (Input.GetKeyDown(ability2Key) && ability2Unlocked)
         {
-            Debug.Log("activate!");
-            ActivatePower2();
-            isAbility2Cooldown = true;
-            currentAbilityCooldown2 = powerupCooldown2;
+            if (!isAbility2Cooldown)
+            {
+                //Debug.Log("activate!");
+                ActivatePower2();
+                m_SFX.playSound(m_SFX.Ability2Clip);
+                isAbility2Cooldown = true;
+                currentAbilityCooldown2 = powerupCooldown2;
+            }
+            else
+            {
+                m_SFX.playSound(m_SFX.noAbilityClip);
+            }
 
         }
     }
     private void Ability3Input()
     {
-        if (Input.GetKeyDown(ability3Key) && !isAbility3Cooldown && ability3Unlocked)
+        if (Input.GetKeyDown(ability3Key) && ability3Unlocked)
         {
-            Debug.Log("activate!");
-            ActivatePower3();
-            isAbility3Cooldown = true;
-            currentAbilityCooldown3 = powerupCooldown3;
+            if (!isAbility3Cooldown)
+            {
+                //Debug.Log("activate!");
+                ActivatePower3();
+                m_SFX.playSound(m_SFX.Ability3Clip);
+                isAbility3Cooldown = true;
+                currentAbilityCooldown3 = powerupCooldown3;
+            }
+            else
+            {
+                m_SFX.playSound(m_SFX.noAbilityClip);
+            }
 
         }
     }
     private void Ability4Input()
     {
-        if (Input.GetKeyDown(ability4Key) && !isAbility4Cooldown && ability4Unlocked)
+        if (Input.GetKeyDown(ability4Key) && ability4Unlocked)
         {
-            Debug.Log("activate!");
-            ActivatePower4();
-            isAbility4Cooldown = true;
-            currentAbilityCooldown4 = powerupCooldown4;
-
+            if (!isAbility4Cooldown)
+            {
+                //Debug.Log("activate!");
+                ActivatePower4();
+                m_SFX.playSound(m_SFX.Ability4Clip);
+                isAbility4Cooldown = true;
+                currentAbilityCooldown4 = powerupCooldown4;
+            }
+            else
+            {
+                m_SFX.playSound(m_SFX.noAbilityClip);
+            }
         }
     }
 
